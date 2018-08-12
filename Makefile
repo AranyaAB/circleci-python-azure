@@ -8,7 +8,7 @@ build:
 	docker tag $(IMAGE) $(REPO)/$(NAME):latest
 
 run:
-	docker run -it --rm $(IMAGE)
+	docker run -it --rm $(IMAGE) bash
 
 push: build
 	docker push $(IMAGE)
