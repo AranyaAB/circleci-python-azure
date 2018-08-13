@@ -14,6 +14,10 @@ RUN apk add --no-cache \
         linux-headers \
         make \
         musl-dev \
-        ssh
+        openssh-client
 
 RUN pip install --no-cache-dir azure-cli==2.0.43
+
+RUN curl -L -o /usr/bin/kubectl \
+    https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+    chmod +x /usr/bin/kubectl
