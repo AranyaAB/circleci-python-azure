@@ -1,6 +1,6 @@
 REPO=aranyaab
 NAME=circleci-python-azure
-TAG=python3.7-azure2.0.43
+TAG=python3.7-azure2.0.60
 IMAGE=$(REPO)/$(NAME)
 
 build:
