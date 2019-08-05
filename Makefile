@@ -1,10 +1,10 @@
 REPO=aranyaab
 NAME=circleci-python-azure
-TAG=python3.7-azure2.0.60
+TAG=python3.7-azure2.0.69
 IMAGE=$(REPO)/$(NAME)
 
 build:
-	docker build -t $(IMAGE):$(TAG) .
+	docker build --network host -t $(IMAGE):$(TAG) .
 
 slim: build
 	docker-slim build --http-probe $(IMAGE):$(TAG)
