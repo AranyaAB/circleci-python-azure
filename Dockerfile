@@ -34,3 +34,7 @@ RUN curl -Lo helm.tar.gz https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.
 ARG SKAFFOLD_VERSION=v1.1.0
 RUN curl -Lo skaffold https://github.com/GoogleContainerTools/skaffold/releases/download/$SKAFFOLD_VERSION/skaffold-linux-amd64 && \
     chmod +x skaffold && mv skaffold /usr/local/bin
+
+ARG KUSTOMIZE_VERSION=v3.5.4
+RUN curl -Lo kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/$KUSTOMIZE_VERSION/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz && \
+    tar zxvf kustomize.tar.gz && mv kustomize /usr/local/bin && rm kustomize.tar.gz
