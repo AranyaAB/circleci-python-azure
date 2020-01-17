@@ -31,7 +31,7 @@ RUN curl -Lo helm.tar.gz https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.
     tar zxvf helm.tar.gz && mv linux-amd64/helm /usr/local/bin && \
     rm helm.tar.gz && rm -rf linux-amd64
 
-ARG SKAFFOLD_VERSION=v1.1.0
+ARG SKAFFOLD_VERSION=v1.2.0
 RUN curl -Lo skaffold https://github.com/GoogleContainerTools/skaffold/releases/download/$SKAFFOLD_VERSION/skaffold-linux-amd64 && \
     chmod +x skaffold && mv skaffold /usr/local/bin
 
