@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.10
+FROM python:3.8-alpine
 
 RUN apk add --no-cache \
         bash \
@@ -18,12 +18,19 @@ RUN apk add --no-cache \
         openssh-client \
         openssl
 
-RUN pip install --no-cache-dir azure-cli==2.0.69
+ARG AZURE_CLI_VERSION=2.0.79
+RUN pip install --no-cache-dir azure-cli==$AZURE_CLI_VERSION
 
 ADD https://storage.googleapis.com/kubernetes-release/release/stable.txt /dev/null
-RUN curl -L -o /usr/bin/kubectl \
+RUN curl -L -o /usr/local/bin/kubectl \
     https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
-    chmod +x /usr/bin/kubectl
+    chmod +x /usr/local/bin/kubectl
 
-ARG HELM_RELEASE=2.14
-RUN curl -L https://raw.githubusercontent.com/helm/helm/release-$HELM_RELEASE/scripts/get | bash
+ARG HELM_VERSION=v3.0.2
+RUN curl -Lo helm.tar.gz https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.gz && \
+    tar zxvf helm.tar.gz && mv linux-amd64/helm /usr/local/bin && \
+    rm helm.tar.gz && rm -rf linux-amd64
+
+ARG SKAFFOLD_VERSION=v1.1.0
+RUN curl -Lo skaffold https://github.com/GoogleContainerTools/skaffold/releases/download/$SKAFFOLD_VERSION/skaffold-linux-amd64 && \
+    chmod +x skaffold && mv skaffold /usr/local/bin
